@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA '25 - Biotechnology Hackathon</title>
+    <title>AURA'25 - Biotechnology Hackathon</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,37 +14,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
 
-    <!-- Three.js CDN for 3D animation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Three.js CDN for 3D animation (latest stable) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
     
-    <!-- Link to your external CSS file -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body class="bg-[#010811]">
 
+    <!-- The main canvas for the background 3D particle animation -->
     <canvas id="three-canvas" class="canvas-background"></canvas>
 
+    <!-- A wrapper for all the page content, used for blur effect when a modal is open -->
     <div class="content-wrapper">
+        <!-- Header section with navigation -->
         <header class="header-nav fixed top-0 left-0 w-full z-50">
             <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#home" class="text-2xl font-bold tracking-wider text-white font-brand">AURA '25</a>
+                <a href="#home" class="text-2xl font-bold tracking-wider text-white font-brand">AURA'25</a>
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="#home" class="text-gray-300 hover:text-white transition-colors duration-300">Home</a>
                     <a href="#about" class="text-gray-300 hover:text-white transition-colors duration-300">About</a>
-                    <a href="#hackfest" class="text-gray-300 hover:text-white transition-colors duration-300">Hackfest</a>
+                    <!-- Dropdown for Hackfest sections -->
+                    <div class="relative group">
+                        <a href="#hackfest" class="text-gray-300 hover:text-white transition-colors duration-300 py-4 px-2">Hackfest</a>
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 w-max bg-[#021018] border border-teal-500/30 rounded-lg shadow-lg p-2 space-y-1 
+                                    opacity-0 group-hover:opacity-100 invisible group-hover:visible transform -translate-y-2 group-hover:translate-y-0 
+                                    transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
+                            <a href="#" class="nav-link block text-gray-300 hover:text-white px-4 py-2 rounded-md" data-target-button="view-Details-btn">Event Details</a>
+                            <a href="#" class="nav-link block text-gray-300 hover:text-white px-4 py-2 rounded-md" data-target-button="view-themes-btn">Themes</a>
+                            <a href="#" class="nav-link block text-gray-300 hover:text-white px-4 py-2 rounded-md" data-target-button="view-registration-btn">Registration Details</a>
+                            <a href="#" class="nav-link block text-gray-300 hover:text-white px-4 py-2 rounded-md" data-target-button="register-now-btn">Register Now</a>
+                        </div>
+                    </div>
                     <a href="#location" class="text-gray-300 hover:text-white transition-colors duration-300">Location</a>
                     <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-300">Contact</a>
                 </div>
             </nav>
         </header>
 
+        <!-- Hero section -->
         <section id="home" class="min-h-screen flex flex-col items-center justify-center text-center px-4 reveal">
-            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bio-gradient-text">
-                AURA '25
+            <h1 class="text-6xl md:text-8xl tracking-tighter text-transparent bg-clip-text bio-gradient-text font-brand">
+                                    AURA&rsquo;25
             </h1>
-            <p class="mt-6 max-w-2xl text-lg md:text-xl text-gray-300">
-                A national-level technical hackfest where biology meets technology. Innovate, build, and solve the future's challenges.
+            <h2 class="mt-4 text-2xl md:text-3xl text-gray-200">
+                Igniting Innovation Through Core Tech
+            </h2>
+            <p class="mt-4 max-w-3xl text-base md:text-lg text-gray-400 leading-relaxed">
+                AURA’25 is an intense 2-day hack fest focused on core technical skills and SDG-based problem solving. Participants tackle real-world challenges, advancing from ideas to impactful, research-driven solutions. It’s a platform to test and showcase your innovation, depth, and execution.
             </p>
             <div class="mt-8">
                 <a href="#hackfest" class="bg-[#00F5D4] text-black font-semibold py-3 px-8 rounded-lg btn-glow inline-block">
@@ -53,6 +77,7 @@
             </div>
         </section>
 
+        <!-- Decorative section divider -->
         <div class="section-divider reveal">
             <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 50L60 55C120 60 240 70 360 70C480 70 600 60 720 55C840 50 960 50 1080 51.7C1200 53.3 1320 56.7 1380 58.3L1440 60V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V50Z" fill="url(#gradient1)"/>
@@ -71,30 +96,29 @@
             </svg>
         </div>
 
+        <!-- About section -->
         <section id="about" class="py-20 px-4 reveal">
-            <div class="container mx-auto text-center max-w-4xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">About AURA '25</h2>
-                <p class="text-lg text-gray-400 mb-12">
-                    AURA - Advancement in Unique Research and Approaches is a prestigious National Level Event organized by our institution. This event brings together the brightest minds from diverse fields to showcase pioneering ideas and groundbreaking research. AURA is a platform for fostering innovation, collaboration, and critical thinking, inviting participants to present cutting-edge solutions to modern challenges.
-                </p>
-                <h3 class="text-3xl font-bold text-teal-300 mb-6">Event Countdown</h3>
-                <div id="countdown" class="grid grid-cols-4 gap-4 max-w-sm mx-auto text-white">
-                    <div class="bg-gray-800/50 border border-teal-500/30 rounded-lg p-4">
-                        <div id="days" class="text-4xl font-bold">0</div><div class="text-sm text-gray-400">Days</div>
+            <div class="container mx-auto max-w-6xl">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <canvas id="about-canvas"></canvas>
                     </div>
-                    <div class="bg-gray-800/50 border border-teal-500/30 rounded-lg p-4">
-                        <div id="hours" class="text-4xl font-bold">0</div><div class="text-sm text-gray-400">Hours</div>
-                    </div>
-                    <div class="bg-gray-800/50 border border-teal-500/30 rounded-lg p-4">
-                        <div id="minutes" class="text-4xl font-bold">0</div><div class="text-sm text-gray-400">Minutes</div>
-                    </div>
-                    <div class="bg-gray-800/50 border border-teal-500/30 rounded-lg p-4">
-                        <div id="seconds" class="text-4xl font-bold">0</div><div class="text-sm text-gray-400">Seconds</div>
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-left mb-6 text-white">ABOUT UYIRI</h2>
+                        <div class="text-lg text-gray-400 space-y-6">
+                            <p>
+                                UYIRI is a vibrant student-led association at Bannari Amman Institute of Technology, committed to fostering excellence and innovation across all domains of biotechnology. It serves as a collaborative platform where young minds unite to explore cutting-edge research, develop sustainable solutions, and drive impactful change aligned with global scientific needs.
+                            </p>
+                             <p>
+                                With a strong focus on enhancing and empowering every facet of biotechnology, UYIRI inspires interdisciplinary collaboration, sharpens research and technical skills, and fuels student-driven initiatives that shape the biotech leaders of tomorrow.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Decorative section divider -->
         <div class="section-divider reveal">
             <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1440 20L720 90L0 20" stroke="url(#gradient-stroke2)" stroke-width="3" class="divider-glow"/>
@@ -108,34 +132,238 @@
             </svg>
         </div>
 
+        <!-- Hackfest section with carousel -->
         <section id="hackfest" class="py-20 px-4 bg-[#021018]/50 reveal">
             <div class="container mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-white">HACKFEST</h2>
-                <div class="flex justify-center max-w-6xl mx-auto" style="perspective: 1000px;">
-                    <div class="interactive-card flex flex-col justify-between p-8 rounded-2xl shadow-2xl shadow-teal-500/10">
-                        <div>
-                            <h3 class="text-2xl font-semibold text-teal-300 mb-2">HACKFEST</h3>
-                            <p class="text-gray-400 mb-6">A rapid hackathon where participants will collaborate to create innovative solutions in the field of biotechnology. Teams will work on real-world problems, leveraging their skills in biology and technology. Dive deeper into the schedule and events.</p>
-                        </div>
-                        <div class="flex flex-col md:flex-row justify-between items-center gap-y-4 mt-4">
-                            <div class="flex-1">
-                                <h4 class="text-lg font-semibold text-white mb-2">Event Details</h4>
-                                <ul class="text-gray-400 text-sm space-y-1">
-                                    <li><span class="font-medium text-white">Date:</span> 15th - 16th SEPTEMBER 2025</li>
-                                    <li><span class="font-medium text-white">Location:</span> BIT Sathy</li>
-                                    <li><span class="font-medium text-white">Eligibility:</span> UG/PG Students</li>
-                                </ul>
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white">HACKFEST</h2>
+                <div id="hackfest-nav" class="flex justify-center space-x-4 mb-8">
+                    <button data-index="0" class="hackfest-nav-btn active">EVENT DETAILS</button>
+                    <button data-index="1" class="hackfest-nav-btn">THEMES</button>
+                    <button data-index="2" class="hackfest-nav-btn">REGISTRATION DETAILS</button>
+                    <button data-index="3" class="hackfest-nav-btn">REGISTER NOW</button>
+                </div>
+                <div class="hackfest-carousel">
+                    <div class="hackfest-slider">
+                        <!-- Event Details Card -->
+                        <div class="hackfest-slide">
+                            <div class="flip-container">
+                                <div class="hackfest-card card-front rounded-2xl">
+                                    <div class="card-bg-wrapper crispr-bg">
+                                        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                     
+                                            <defs>
+                                                <filter id="glow">
+                                                    <feGaussianBlur stdDeviation="3.5" result="coloredBlur"></feGaussianBlur>
+                                                    <feMerge>
+                                                        <feMergeNode in="coloredBlur"></feMergeNode>
+                                                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                                                    </feMerge>
+                                                </filter>
+                                            </defs>
+                                            <g class="dna-strand">
+                                                <path d="M 100 0 C 200 100, 200 300, 100 400" stroke="#00f5d4" stroke-width="8" fill="none" opacity="0.4"/>
+                                                <path d="M 300 0 C 200 100, 200 300, 300 400" stroke="#00aaff" stroke-width="8" fill="none" opacity="0.4"/>
+                                                <line x1="150" y1="100" x2="250" y2="100" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                                                <line x1="150" y1="200" x2="250" y2="200" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                                                <line x1="150" y1="300" x2="250" y2="300" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                                            </g>
+                                            <circle class="cutter-glow" r="10" fill="white" filter="url(#glow)">
+                                                 <animateMotion dur="6s" repeatCount="indefinite" path="M150 100 L 250 100 L 250 300 L 150 300 Z" />
+                                            </circle>
+                                            <circle class="cutter" r="4" fill="#00f5d4">
+                                                <animateMotion dur="6s" repeatCount="indefinite" path="M150 100 L 250 100 L 250 300 L 150 300 Z" />
+                                            </circle>
+                                        </svg>
+                                    </div>
+                                    <span class="corner-glow corner-top-left"></span>
+                                    <span class="corner-glow corner-top-right"></span>
+                                    <span class="corner-glow corner-bottom-left"></span>
+                                    <span class="corner-glow corner-bottom-right"></span>
+                                    <div class="card-inner">
+                                        <div class="hackfest-icon mb-4 text-6xl"><i class="ph-fill ph-calendar-check"></i></div>
+                                        <div class="flex-grow flex flex-col justify-center">
+                                            <h3 class="font-bold text-white mb-4 uppercase">Event Details</h3>
+                                            <p class="text-gray-400 mb-6">Explore the full schedule and timeline of the hackathon events.</p>
+                                        </div>
+                                        <button id="view-Details-btn" class="action-btn mt-auto bg-teal-400 text-black font-semibold py-3 px-8 rounded-lg btn-glow" data-overlay-id="full-Details-overlay">View Timeline</button>
+                                    </div>
+                                </div>
+                                <div class="hackfest-card card-back rounded-2xl"></div>
                             </div>
-                            <div class="flex-shrink-0 flex flex-col gap-4">
-                                <button id="view-Details-btn" class="text-center bg-teal-500/20 text-teal-200 font-semibold py-2 px-6 rounded-lg border border-teal-500/50 hover:bg-teal-500/40 transition-colors duration-300">View Details</button>
-                                <a href="#" target="_blank" class="text-center bg-teal-500 text-black font-semibold py-2 px-6 rounded-lg btn-glow">Register Now</a>
+                        </div>
+                        <!-- Themes Card -->
+                        <div class="hackfest-slide">
+                            <div class="flip-container">
+                                <div class="hackfest-card card-front rounded-2xl">
+                                    <div class="card-bg-wrapper cancer-bio-bg">
+                                        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <filter id="glow">
+                                                    <feGaussianBlur stdDeviation="3.5" result="coloredBlur"></feGaussianBlur>
+                                                    <feMerge>
+                                                        <feMergeNode in="coloredBlur"></feMergeNode>
+                                                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                                                    </feMerge>
+                                                </filter>
+                                            </defs>
+                                            <circle class="cell" cx="100" cy="100" r="40" fill="#ad53e6" opacity="0.3" filter="url(#glow)"/>
+                                            <circle class="cell" cx="250" cy="120" r="60" fill="#00aaff" opacity="0.2" filter="url(#glow)"/>
+                                            <circle class="cell" cx="150" cy="280" r="50" fill="#00f5d4" opacity="0.25" filter="url(#glow)"/>
+                                            <circle class="cell" cx="300" cy="300" r="30" fill="#ad53e6" opacity="0.3" filter="url(#glow)"/>
+                                            <circle class="particle" cx="50" cy="200" r="3" fill="#00f5d4"/>
+                                            <circle class="particle" cx="350" cy="100" r="2" fill="#00aaff"/>
+                                            <circle class="particle" cx="200" cy="350" r="3" fill="white"/>
+                                        </svg>
+                                    </div>
+                                    <span class="corner-glow corner-top-left"></span>
+                                    <span class="corner-glow corner-top-right"></span>
+                                    <span class="corner-glow corner-bottom-left"></span>
+                                    <span class="corner-glow corner-bottom-right"></span>
+                                    <div class="card-inner">
+                                        <div class="hackfest-icon mb-4 text-6xl"><i class="ph-fill ph-lightbulb"></i></div>
+                                        <div class="flex-grow flex flex-col justify-center">
+                                            <h3 class="font-bold text-white mb-4 uppercase">Themes</h3>
+                                            <p class="text-gray-400 mb-6">Discover the SDG goals and challenges you can tackle.</p>
+                                        </div>
+                                        <button id="view-themes-btn" class="action-btn mt-auto bg-teal-400 text-black font-semibold py-3 px-8 rounded-lg btn-glow" data-overlay-id="full-themes-overlay">Explore Themes</button>
+                                    </div>
+                                </div>
+                                <div class="hackfest-card card-back rounded-2xl"></div>
+                            </div>
+                        </div>
+                        <!-- Registration Card -->
+                        <div class="hackfest-slide">
+                            <div class="flip-container">
+                                <div class="hackfest-card card-front rounded-2xl">
+                                    <div class="card-bg-wrapper astrobiology-bg">
+                                         <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <radialGradient id="planetGrad">
+                                                    <stop offset="0%" stop-color="#00aaff" />
+                                                    <stop offset="100%" stop-color="#ad53e6" />
+                                                </radialGradient>
+                                                 <radialGradient id="moonGrad">
+                                                    <stop offset="0%" stop-color="#cccccc" />
+                                                    <stop offset="100%" stop-color="#888888" />
+                                                </radialGradient>
+                                                <filter id="starGlow">
+                                                    <feGaussianBlur stdDeviation="1.5" />
+                                                </filter>
+                                            </defs>
+                                            <g class="stars">
+                                                <circle class="star" cx="50" cy="50" r="2" fill="white"/>
+                                                <circle class="star" cx="350" cy="80" r="1" fill="white"/>
+                                                <circle class="star" cx="150" cy="340" r="1.5" fill="white"/>
+                                                <circle class="star" cx="250" cy="40" r="2" fill="white"/>
+                                                <circle class="star" cx="80" cy="150" r="1" fill="white"/>
+                                                <circle class="star" cx="320" cy="220" r="1.5" fill="white"/>
+                                                <circle class="star" cx="120" cy="250" r="1" fill="white"/>
+                                            </g>
+                                            <g class="moon" transform="translate(80 300) rotate(15)">
+                                                <circle r="30" fill="url(#moonGrad)"/>
+                                                <circle cx="-10" cy="5" r="5" fill="rgba(0,0,0,0.2)"/>
+                                                <circle cx="12" cy="-8" r="3" fill="rgba(0,0,0,0.2)"/>
+                                            </g>
+                                            <ellipse class="orbit-path" cx="200" cy="200" rx="150" ry="80" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none" transform="rotate(-30 200 200)"/>
+                                            <g class="planet-orbit">
+                                                <g class="planet">
+                                                    <circle cx="0" cy="0" r="40" fill="url(#planetGrad)" />
+                                                    <path d="M -40,0 a 40,15 0 0,0 80,0" fill="rgba(0,0,0,0.2)" />
+                                                </g>
+                                            </g>
+                                             <g class="spaceship" transform="scale(0.5)">
+                                                <path d="M 100 10 L 120 40 L 80 40 Z" fill="#cccccc"/>
+                                                <rect x="80" y="40" width="40" height="30" fill="#aaaaaa"/>
+                                                <circle cx="100" cy="25" r="8" fill="#00f5d4"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <span class="corner-glow corner-top-left"></span>
+                                    <span class="corner-glow corner-top-right"></span>
+                                    <span class="corner-glow corner-bottom-left"></span>
+                                    <span class="corner-glow corner-bottom-right"></span>
+                                    <div class="card-inner">
+                                        <div class="hackfest-icon mb-4 text-6xl"><i class="ph-fill ph-scroll"></i></div>
+                                        <div class="flex-grow flex flex-col justify-center">
+                                            <h3 class="font-bold text-white mb-4 uppercase">Registration Details</h3>
+                                            <p class="text-gray-400 mb-6">Read the guidelines for participation and registration.</p>
+                                        </div>
+                                        <button id="view-registration-btn" class="action-btn mt-auto bg-teal-400 text-black font-semibold py-3 px-8 rounded-lg btn-glow" data-overlay-id="full-registration-overlay">View Guidelines</button>
+                                    </div>
+                                </div>
+                                <div class="hackfest-card card-back rounded-2xl"></div>
+                            </div>
+                        </div>
+                        <!-- Register Now Card -->
+                        <div class="hackfest-slide">
+                             <div class="flip-container">
+                                <div class="hackfest-card card-front rounded-2xl">
+                                    <div class="card-bg-wrapper species-recovery-bg">
+                                        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                                    <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+                                                </filter>
+                                            </defs>
+                                            <g class="foliage">
+                                                <path class="leaf" d="M50 150 C 70 120, 130 120, 150 150 Q 100 180, 50 150 Z" fill="#00f5d4" />
+                                                <path class="leaf" d="M200 280 C 220 250, 280 250, 300 280 Q 250 310, 200 280 Z" fill="#00aaff" />
+                                            </g>
+                                            <g class="tracks" filter="url(#softGlow)">
+                                                <path class="track" d="M100 50 Q 120 40, 140 50 T 180 50" fill="none" stroke="#00f5d4" stroke-width="4" stroke-linecap="round"/>
+                                                <path class="track" d="M250 180 Q 270 170, 290 180 T 330 180" fill="none" stroke="#00aaff" stroke-width="4" stroke-linecap="round"/>
+                                                <path class="track" d="M80 350 Q 100 340, 120 350 T 160 350" fill="none" stroke="#ad53e6" stroke-width="4" stroke-linecap="round"/>
+                                            </g>
+                                            <g class="peeking-cat" transform="translate(0, 280)">
+                                                <path d="M 0 50 C 10 20, 40 20, 50 50" fill="#aaaaaa" />
+                                                <path d="M 10 20 L 0 0 L 20 20" fill="#ffaaaa" />
+                                                <path d="M 40 20 L 50 0 L 30 20" fill="#ffaaaa" />
+                                                <circle cx="15" cy="35" r="3" fill="black" />
+                                                <circle cx="35" cy="35" r="3" fill="black" />
+                                            </g>
+                                            <g class="peeking-dog" transform="translate(350, 280)">
+                                                <path d="M 0 50 C 10 20, 40 20, 50 50" fill="#D2B48C" />
+                                                <path d="M 0 20 C -10 40, 0 50, 0 20" fill="#8B4513" />
+                                                <path d="M 50 20 C 60 40, 50 50, 50 20" fill="#8B4513" />
+                                                <circle cx="15" cy="35" r="3" fill="black" />
+                                                <circle cx="35" cy="35" r="3" fill="black" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <span class="corner-glow corner-top-left"></span>
+                                    <span class="corner-glow corner-top-right"></span>
+                                    <span class="corner-glow corner-bottom-left"></span>
+                                    <span class="corner-glow corner-bottom-right"></span>
+                                    <div class="card-inner">
+                                        <div class="hackfest-icon mb-4 text-6xl"><i class="ph-fill ph-rocket-launch"></i></div>
+                                        <div class="flex-grow flex flex-col justify-center">
+                                            <h3 class="font-bold text-white mb-4 uppercase">Ready to Innovate?</h3>
+                                            <div class="flex justify-center my-4">
+                                                <div class="backdrop-blur-xl bg-gradient-to-br from-[#0a1122]/80 via-[#0a1122]/95 to-[#0a1122]/90 border border-teal-300/40 rounded-2xl shadow-lg p-4 flex space-x-4 items-center" style="box-shadow:0 0 15px 2px #00f5d4;">
+                                                    <div id="card-countdown" class="flex space-x-4 text-white">
+                                                        <div><span id="card-days" class="text-3xl font-bold">0</span><p class="text-xs">Days</p></div>
+                                                        <div><span id="card-hours" class="text-3xl font-bold">0</span><p class="text-xs">Hours</p></div>
+                                                        <div><span id="card-minutes" class="text-3xl font-bold">0</span><p class="text-xs">Minutes</p></div>
+                                                        <div><span id="card-seconds" class="text-3xl font-bold">0</span><p class="text-xs">Seconds</p></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p class="font-bold text-teal-300 text-lg mt-2">September 25 & 26, 2025</p>
+                                        </div>
+                                        <a href="https://forms.gle/LB4Ma4SHuy6VAy6W9" id="register-now-btn" target="_blank" class="mt-auto bg-teal-400 text-black font-semibold py-3 px-8 rounded-lg btn-glow register-now-btn">Register Now</a>
+                                    </div>
+                                </div>
+                                 <div class="hackfest-card card-back rounded-2xl"></div>
                             </div>
                         </div>
                     </div>
+                    <button class="carousel-arrow arrow-left">&lt;</button>
+                    <button class="carousel-arrow arrow-right">&gt;</button>
                 </div>
             </div>
         </section>
         
+        <!-- Decorative section divider -->
         <div class="section-divider reveal">
              <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 80 C 240 20, 480 120, 720 80, 960 40, 1200 140, 1440 80" stroke="url(#gradient-stroke1)" stroke-width="2" class="divider-glow"/>
@@ -143,10 +371,12 @@
             </svg>
         </div>
 
+        <!-- Location section -->
         <section id="location" class="py-20 px-4 reveal">
             <div class="container mx-auto max-w-7xl">
                 <h1 class="text-5xl md:text-6xl font-bold text-center mb-16 text-teal-300 font-brand">Find Your Way to Innovation</h1>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" style="perspective: 1500px;">
+                    <!-- Venue and travel details card -->
                     <div class="interactive-card rounded-2xl p-8" style="transform-style: preserve-3d;">
                         <h2 class="text-3xl font-bold text-teal-300 mb-4 font-brand">Venue Details</h2>
                         <p class="text-lg text-gray-200 leading-relaxed">
@@ -154,33 +384,36 @@
                             Sathyamangalam, Erode - 638401,<br>
                             Tamil Nadu, India.
                         </p>
-                        <a href="https://www.google.com/maps/place/Bannari+Amman+Institute+of+Technology/@11.492584,77.276996,15z/data=!4m6!3m5!1s0x3ba9215c65a7e63d:0x5f5431636536456a!8m2!3d11.492584!4d77.276996!16s%2Fm%2F02prgnn?hl=en-US&entry=ttu" target="_blank" class="mt-6 bg-[#00F5D4] text-black font-semibold py-3 px-8 rounded-lg btn-glow inline-block">
+                        <a href="https://www.google.com/maps/place/Bannari+Amman+Institute+of+Technology/@11.492584,77.276996,15z/data=!4m6!3m5!1s0x3ba9215c65a7e63d:0x5f5431636536456a!8m2!3d11.492584!4d77.276996!16s%2Fm%2F02prgnn?hl=en-US&entry=ttu" target="_blank" class="mt-auto bg-[#00F5D4] text-black font-semibold py-3 px-8 rounded-lg btn-glow inline-block">
                             Get Directions
                         </a>
                         <div class="border-t border-teal-500/20 my-8"></div>
                         <h3 class="text-2xl font-bold text-teal-300 mb-6 font-brand">Travel Information</h3>
                         <div class="space-y-6">
+                            <!-- Travel by Air -->
                             <div class="flex items-start">
                                 <div class="travel-icon flex-shrink-0">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                                    <i class="ph-fill ph-airplane-takeoff text-2xl"></i>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-white">By Air</h4>
                                     <p class="text-gray-400">The nearest airport is Coimbatore International Airport (CJB), approximately 70km away. Taxis and buses are readily available from the airport.</p>
                                 </div>
                             </div>
+                            <!-- Travel by Train -->
                             <div class="flex items-start">
                                 <div class="travel-icon flex-shrink-0">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2z"></path></svg>
+                                    <i class="ph-fill ph-train text-2xl"></i>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-white">By Train</h4>
                                     <p class="text-gray-400">Erode Junction (ED) is the closest major railway station, around 60km from the campus. You can hire a cab or take a bus to Sathyamangalam.</p>
                                 </div>
                             </div>
+                            <!-- Travel by Road -->
                             <div class="flex items-start">
                                 <div class="travel-icon flex-shrink-0">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5h2m-4 0h.01"></path></svg>
+                                    <i class="ph-fill ph-bus text-2xl"></i>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-white">By Road</h4>
@@ -189,6 +422,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Google Maps embed -->
                     <div class="map-container rounded-2xl overflow-hidden shadow-2xl shadow-teal-500/10 h-96 lg:h-full">
                         <iframe width="100%" height="100%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3911.31940905156!2d77.2744209148063!3d11.49258929190886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba9215c65a7e63d%3A0x5f5431636536456a!2sBannari%20Amman%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1669812181213!5m2!1sen!2sin" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                     </div>
@@ -196,41 +430,75 @@
             </section>
         </section>
 
+        <!-- Footer and Contact section -->
         <footer id="contact" class="py-20 px-4 reveal">
             <div class="container mx-auto text-center">
                 <h2 class="text-4xl md:text-5xl font-bold mb-12 text-white">Contact Us</h2>
                 <div class="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto mb-12">
+                    <!-- Email contact -->
                     <div class="text-center">
                         <div class="contact-icon-wrapper flex items-center justify-center mx-auto w-16 h-16 bg-teal-500/10 border border-teal-500/30 rounded-full mb-4">
-                           <svg class="w-8 h-8 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 012 2z"></path></svg>
+                           <i class="ph-fill ph-envelope-simple text-3xl text-teal-300"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-1">Email</h3>
                         <a href="mailto:btevents@bitsathy.ac.in" class="text-gray-400 hover:text-teal-300">btevents@bitsathy.ac.in</a>
                     </div>
+                    <!-- Address -->
                     <div class="text-center">
                         <div class="contact-icon-wrapper flex items-center justify-center mx-auto w-16 h-16 bg-teal-500/10 border border-teal-500/30 rounded-full mb-4">
-                            <svg class="w-8 h-8 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <i class="ph-fill ph-map-pin text-3xl text-teal-300"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-1">Address</h3>
                         <p class="text-gray-400">Bannari Amman Institute of Technology, Sathyamangalam, Erode - 638401</p>
                     </div>
+                    <!-- Phone contact -->
                     <div class="text-center">
                         <div class="contact-icon-wrapper flex items-center justify-center mx-auto w-16 h-16 bg-teal-500/10 border border-teal-500/30 rounded-full mb-4">
-                           <svg class="w-8 h-8 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                           <i class="ph-fill ph-phone text-3xl text-teal-300"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-1">Phone</h3>
-                        <a href="tel:8098269450" class="text-gray-400 hover:text-teal-300">91235 32676</a>
+                        <div class="space-y-2">
+                            <div class="flex justify-center items-center gap-2 text-sm">
+                                <span class="font-semibold text-gray-300">GENERAL CONTACT:</span>
+                                <a href="tel:8072744809" class="text-gray-400 hover:text-teal-300">80727 44809</a>
+                            </div>
+                            <div class="flex justify-center items-center gap-2 text-sm">
+                                <span class="font-semibold text-gray-300">GIRLS ACCOMMODATION:</span>
+                                <a href="tel:9894095744" class="text-gray-400 hover:text-teal-300">98940 95744</a>
+                            </div>
+                            <div class="flex justify-center items-center gap-2 text-sm">
+                                <span class="font-semibold text-gray-300">BOYS ACCOMMODATION:</span>
+                                <a href="tel:9894095744" class="text-gray-400 hover:text-teal-300">98940 95744</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- Faculty and President details -->
                 <div class="border-t border-teal-500/20 pt-8 mt-8">
-                    <h3 class="text-2xl font-bold text-white mb-6">Association Members</h3>
-                    <div class="flex flex-col md:flex-row justify-center items-center gap-x-12 gap-y-4">
-                        <p class="text-gray-300">ERAAGUL: <a href="tel:91235 32676" class="hover:text-teal-300">+91 91235 32676</a></p>
-                        <p class="text-gray-300">MAHALAKSHIMI: <a href="tel:97861 09507" class="hover:text-teal-300">+91 97861 09507</a></p>
+                    <div class="flex flex-col md:flex-row justify-center items-start gap-x-12 gap-y-8">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-white mb-6 uppercase">Faculty Advisors</h3>
+                            <div class="space-y-2 text-gray-300">
+                                <p>DR. BALAKRISHNARAJA R<br><span class="text-sm text-gray-400">HEAD OF THE DEPARTMENT-BT</span></p>
+                                <p>DR. KIRUPA SANKAR M<br><span class="text-sm text-gray-400">EXECUTIVE HEAD-BT</span></p>
+                                <p>MR. VAIDHYANATHAN B<br><span class="text-sm text-gray-400">ASSISTANT PROFESSOR-BT</span></p>
+                                <p>DR. SARANYA S<br><span class="text-sm text-gray-400">ASSISTANT PROFESSOR-BT</span></p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-2xl font-bold text-white mb-6 uppercase">Association Members</h3>
+                            <div class="space-y-2 text-gray-300">
+                                <p>MR. ERAAGUL<br><span class="text-sm text-gray-400">PRESIDENT</span></p>
+                                <p>MS. MAHALAKSHIMI<br><span class="text-sm text-gray-400">PRESIDENT</span></p>
+                                <p>MR.DHARNESH.R<br><span class="text-sm text-gray-400">VICE-PRESIDENT</span></p>
+                                <p>MS.ILAKKYA.S<br><span class="text-sm text-gray-400">VICE-PRESIDENT</span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </footer>
+        <!-- Copyright footer -->
         <footer class="border-t border-teal-500/20 py-6">
             <div class="text-center">
                 <p class="text-sm text-gray-400">Developed by Dhivakar</p>
@@ -242,89 +510,116 @@
     <div id="full-Details-overlay" class="opacity-0 pointer-events-none">
         <canvas id="synapse-canvas" class="canvas-background"></canvas>
         <button id="full-Details-close" class="text-white text-5xl leading-none hover:text-teal-300 transition-colors">&times;</button>
-        <div class="pt-24 pb-20 px-4 relative z-10">
-             <div class="container mx-auto max-w-7xl">
-                <h1 class="text-5xl md:text-6xl font-bold text-center mb-20 text-teal-300 font-brand">Event Details</h1>
-                <div class="Details-container-vertical">
-                    <!-- Moment 1 -->
-                    <div class="Details-moment">
-                        <div class="Details-trunk">
-                            <div class="Details-card p-4 rounded-xl text-center">
-                                <h3 class="font-bold text-3xl text-teal-300">Ideathon</h3>
-                                <p class="hidden">Kickoff event to brainstorm and pitch groundbreaking ideas.</p>
-                                <a href="#" class="hidden">Rule Book</a>
+        <div class="relative w-full h-full overflow-y-auto overlay-scroller">
+            <div class="pt-24 pb-20 px-4 relative z-10">
+                 <div class="container mx-auto max-w-7xl">
+                    <h1 class="text-5xl md:text-6xl font-bold text-center mb-10 text-teal-300 font-brand">Event Timeline</h1>
+                    <!-- Vertical timeline container -->
+                    <div class="Details-container-vertical">
+                        
+                        <div class="w-full text-center">
+                            <h2 class="day-heading">Day 1</h2>
+                        </div>
+
+                        <!-- Timeline Moment 2 -->
+                        <div class="Details-moment">
+                            <div class="Details-branch branch-left">
+                                <div class="Details-card p-4 rounded-lg">
+                                    <h4>Hot seat</h4>
+                                    <p class="hidden">A game where clues spark chaos and guesses win glory. One word. Five clues. One shot. Step in, sit tight — the heat is on!</p>
+                                </div>
+                            </div>
+                            <div class="Details-trunk">
+                                <div class="Details-card p-4 rounded-xl text-center">
+                                    <h3>Level 1</h3>
+                                    <div class="event-time">10:00 AM - 12:00 PM</div>
+                                    <p class="hidden">"Present to Progress: Showcase Your SDG Solutions, Prove Your Domain Power!" Unveil your ideas through impactful posters or reports on real-world challenges, and gear up for technical twists that test your thinking beyond the paper!</p>
+                                </div>
+                            </div>
+                            <div class="Details-branch branch-right">
+                                 <div class="Details-card p-4 rounded-lg">
+                                    <h4>Match the Quiz</h4>
+                                    <p class="hidden">A game to crack the clues, beat the confusion, and make the perfect pairings—only the smartest, fastest, and most in-sync duos will claim the win.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="Details-branch branch-left">
-                            <div class="Details-card p-4 rounded-lg">
-                                <h4 class="font-bold text-lg text-blue-300">Bio-Quiz</h4>
-                                <p class="hidden">Test your biotech knowledge in a fast-paced quiz.</p>
-                                <a href="#" class="hidden">Rule Book</a>
+
+                        <!-- Timeline Moment 3 -->
+                        <div class="Details-moment">
+                            <div class="Details-branch branch-left">
+                                <div class="Details-card p-4 rounded-lg">
+                                    <h4>Memory</h4>
+                                    <p class="hidden">A game where Science meets speed in this adrenaline-pumping recall challenge. How much can you remember when the clock’s against you?</p>
+                                </div>
+                            </div>
+                            <div class="Details-trunk">
+                                <div class="Details-card p-4 rounded-xl text-center">
+                                    <h3>Level 2</h3>
+                                    <div class="event-time">2:00 PM - 4:00 PM</div>
+                                    <p class="hidden">"From Page to Pitch: Present Your Vision, Power Your Position!" Transform your report into a compelling presentation that reflects your innovation, research, and design thinking—while parallel branch battles boost your leaderboard journey!</p>
+                                </div>
+                            </div>
+                            <div class="Details-branch branch-right">
+                                 <div class="Details-card p-4 rounded-lg">
+                                    <h4>Blind Puzzle</h4>
+                                    <p class="hidden">A game designed to test communication, problem-solving, and subject knowledge. Players must rely on coordination and strategy to complete each challenge under time pressure.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="Details-branch branch-right">
-                            <div class="Details-card p-4 rounded-lg">
-                                <h4 class="font-bold text-lg text-blue-300">Meme Mania</h4>
-                                <p class="hidden">Showcase your humor by creating the funniest biotech memes.</p>
-                                <a href="#" class="hidden">Rule Book</a>
+                        
+                         <!-- Timeline Moment 4 -->
+                        <div class="Details-moment final-moment">
+                            <div class="Details-trunk">
+                                <div class="Details-card p-4 rounded-xl text-center">
+                                    <h3>Level 3</h3>
+                                    <div class="event-time">5:00 PM onwards</div>
+                                    <p class="hidden">"Midnight Unlocked: Where Ideas Ignite Under Moonlight!" As darkness falls, the real challenge begins — dive deep into the unveiled problem statement and race against the night to craft your solution in just 16 hours!</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Moment 2 -->
-                    <div class="Details-moment">
-                        <div class="Details-trunk">
-                            <div class="Details-card p-4 rounded-xl text-center">
-                                <h3 class="font-bold text-3xl text-teal-300">Hackathon Day 1</h3>
-                                <p class="hidden">The 48-hour intensive coding and prototyping marathon begins.</p>
-                                <a href="#" class="hidden">Rule Book</a>
+
+                        <div class="section-divider my-8">
+                            <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M0 80 C 240 20, 480 120, 720 80, 960 40, 1200 140, 1440 80" stroke="url(#gradient-stroke1)" stroke-width="2" class="divider-glow"/>
+                               <path d="M0 70 C 200 40, 400 90, 720 70, 900 50, 1200 100, 1440 70" stroke="url(#gradient-stroke2)" stroke-width="1" stroke-opacity="0.4" class="divider-glow"/>
+                           </svg>
+                       </div>
+
+                        <div class="w-full text-center">
+                            <h2 class="day-heading">Day 2</h2>
+                        </div>
+
+                        <!-- Timeline Moment 6 -->
+                        <div class="Details-moment">
+                            <div class="Details-branch branch-left">
+                                 <div class="Details-card p-4 rounded-lg">
+                                    <h4>Decode & Act</h4>
+                                    <p class="hidden">A game of laughs, drama & lightning-fast guesses! Where crazy clues meet wild actions — and only the quickest win. One phrase. No exact words. All action. Act fast, guess right — the clock won’t wait!</p>
+                                </div>
+                            </div>
+                            <div class="Details-trunk">
+                                <div class="Details-card p-4 rounded-xl text-center">
+                                    <h3>Level 4</h3>
+                                    <div class="event-time">10:00 AM - 1:00 PM</div>
+                                    <p class="hidden">"Voices That Shape Ideas!" Step into the spotlight and let your arguments lead the way — Group-wise Debate Rounds where logic, clarity, and conviction collide!</p>
+                                </div>
+                            </div>
+                            <div class="Details-branch branch-right">
+                                <div class="Details-card p-4 rounded-lg">
+                                    <h4>Bit in BIT</h4>
+                                    <p class="hidden">In a world of silence, they spoke in clicks — decoding victory one signal at a time, proving that true teamwork needs no words, only wisdom.</p>
+                                </div>
                             </div>
                         </div>
-                         <div class="Details-branch branch-left">
-                            <div class="Details-card p-4 rounded-lg">
-                                <h4 class="font-bold text-lg text-blue-300">Gaming Zone</h4>
-                                <p class="hidden">De-stress and compete in our dedicated gaming area.</p>
-                                <a href="#" class="hidden">Rule Book</a>
-                            </div>
-                        </div>
-                        <div class="Details-branch branch-right">
-                            <div class="Details-card p-4 rounded-lg">
-                                <h4 class="font-bold text-lg text-blue-300">Guest Lecture</h4>
-                                <p class="hidden">Gain insights from an industry expert in biotechnology.</p>
-                                <a href="#" class="hidden">Rule Book</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Moment 3 -->
-                    <div class="Details-moment">
-                        <div class="Details-trunk">
-                            <div class="Details-card p-4 rounded-xl text-center">
-                                <h3 class="font-bold text-3xl text-teal-300">Hackathon Day 2</h3>
-                                <p class="hidden">Refine prototypes and prepare for the final presentation.</p>
-                                <a href="#" class="hidden">Rule Book</a>
-                            </div>
-                        </div>
-                        <div class="Details-branch branch-left">
-                            <div class="Details-card p-4 rounded-lg">
-                                <h4 class="font-bold text-lg text-blue-300">Surprise Event</h4>
-                                <p class="hidden">Expect the unexpected! A fun event revealed on the day.</p>
-                                <a href="#" class="hidden">Rule Book</a>
-                            </div>
-                        </div>
-                        <div class="Details-branch branch-right">
-                            <div class="Details-card p-4 rounded-lg">
-                                <h4 class="font-bold text-lg text-blue-300">Networking Session</h4>
-                                <p class="hidden">Connect with mentors, judges, and fellow participants.</p>
-                                <a href="#" class="hidden">Rule Book</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Final Moment -->
-                    <div class="Details-moment final-moment">
-                        <div class="Details-trunk">
-                            <div class="Details-card p-4 rounded-xl text-center">
-                                <h3 class="font-bold text-3xl text-teal-300">Final Pitches & Awards</h3>
-                                <p class="hidden">The grand finale. Teams present their projects, followed by the closing ceremony.</p>
-                                <a href="#" class="hidden">Rule Book</a>
+                        
+                        <!-- Timeline Moment 7 -->
+                         <div class="Details-moment final-moment">
+                            <div class="Details-trunk">
+                                <div class="Details-card p-4 rounded-xl text-center">
+                                    <h3>Level 5</h3>
+                                    <div class="event-time">2:00 PM - 5:00 PM</div>
+                                    <p class="hidden">"Clash of Clarity: The Final Face-Off for Sustainable Impact!" Only the sharpest minds rise — shortlisted teams battle it out in the ultimate debate where merit, clarity, and sustainability decide the champions!</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -332,17 +627,117 @@
             </div>
         </div>
     </div>
+    
+    <!-- Themes Overlay -->
+    <div id="full-themes-overlay" class="opacity-0 pointer-events-none">
+        <canvas id="themes-canvas" class="canvas-background"></canvas>
+        <button id="full-themes-close" class="text-white text-5xl leading-none hover:text-teal-300 transition-colors">&times;</button>
+        <div class="relative w-full h-full overflow-y-auto overlay-scroller">
+            <div class="pt-24 pb-20 px-4 relative z-10">
+                 <div class="container mx-auto max-w-4xl">
+                    <h1 class="text-5xl md:text-6xl font-bold text-center mb-20 text-teal-300 font-brand">SDG GOALS</h1>
+                    <div class="space-y-8">
+                        <!-- SDG 3 -->
+                        <div class="theme-card p-6 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-white mb-2">1. Good Health and Well-Being (SDG 3)</h3>
+                            <p class="text-gray-400">Strives to reduce maternal and child mortality, fight communicable and non-communicable diseases, and expand access to essential health services. It also addresses mental health, substance abuse, and road safety to promote overall well-being.</p>
+                        </div>
+                        <!-- SDG 6 -->
+                        <div class="theme-card p-6 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-white mb-2">2. Clean Water and Sanitation (SDG 6)</h3>
+                            <p class="text-gray-400">Focuses on ensuring universal access to safe and affordable drinking water, improved sanitation facilities, and hygiene education. It promotes water-use efficiency, supports community-led water management, and addresses water scarcity and pollution.</p>
+                        </div>
+                        <!-- SDG 9 -->
+                        <div class="theme-card p-6 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-white mb-2">3. Industry, Innovation and Infrastructure (SDG 9)</h3>
+                            <p class="text-gray-400">Aims to build strong physical and digital infrastructure, promote sustainable industrial development, and support research and technological advancement. It encourages innovation as a means to create inclusive economic growth and adapt to future challenges.</p>
+                        </div>
+                        <!-- SDG 12 -->
+                        <div class="theme-card p-6 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-white mb-2">4. Responsible Consumption and Production (SDG 12)</h3>
+                            <p class="text-gray-400">Encourages sustainable resource use, eco-friendly manufacturing, and reduction of food and material waste. It focuses on educating consumers and industries to make informed decisions that reduce environmental impact and support long-term sustainability.</p>
+                        </div>
+                        <!-- SDG 14 -->
+                        <div class="theme-card p-6 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-white mb-2">5. Life Below Water (SDG 14)</h3>
+                            <p class="text-gray-400">Targets the protection of marine biodiversity by controlling ocean pollution, regulating unsustainable fishing practices, and preserving coral reefs. It highlights the role of healthy oceans in regulating climate and supporting coastal communities.</p>
+                        </div>
+                        <!-- SDG 15 -->
+                        <div class="theme-card p-6 rounded-2xl">
+                            <h3 class="text-2xl font-bold text-white mb-2">6. Life on Land (SDG 15)</h3>
+                            <p class="text-gray-400">Supports the sustainable management of forests, protection of wildlife habitats, and restoration of degraded lands. It aims to combat the threats of deforestation, desertification, and the illegal wildlife trade to preserve ecological balance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Overlay -->
+    <div id="full-registration-overlay" class="opacity-0 pointer-events-none">
+        <canvas id="registration-canvas" class="canvas-background"></canvas>
+        <button id="full-registration-close" class="text-white text-5xl leading-none hover:text-teal-300 transition-colors">&times;</button>
+        <div class="relative w-full h-full overflow-y-auto overlay-scroller">
+            <div class="pt-24 pb-20 px-4 relative z-10">
+                 <div class="container mx-auto max-w-4xl">
+                    <h1 class="text-5xl md:text-6xl font-bold text-center mb-12 text-teal-300 font-brand">Registration & Participation Guidelines</h1>
+                    <div class="flex flex-col gap-8 text-lg">
+                        <div class="registration-card p-8 rounded-2xl">
+                            <h2 class="text-3xl font-bold text-teal-300 mb-6 font-brand">General Guidelines</h2>
+                            <ul class="space-y-4 list-disc list-inside text-gray-300">
+                                <li>AURA'25 is a 2-day intercollegiate event that encourages innovation and sustainable thinking.</li>
+                                <li>All B.E. / B.Tech students from any branch are allowed to participate.</li>
+                                <li>Each team must have a minimum of 3 and a maximum of 4 participants.</li>
+                                <li>Team name and member names must be clearly mentioned during registration, and names should match college ID or institutional records.</li>
+                                <li>Teams are required to select a theme based on the Sustainable Development Goals (SDGs).</li>
+                                <li>The list of SDG themes is provided in the official brochure, and their descriptions are attached below.</li>
+                                <li>Participants must select their SDG theme during registration.</li>
+                                <li>All event entries or presentations must be aligned with the selected SDG theme.</li>
+                            </ul>
+                        </div>
+                         <div class="registration-card p-8 rounded-2xl">
+                            <h2 class="text-3xl font-bold text-teal-300 mb-6 font-brand">Registration Fees</h2>
+                            <ul class="space-y-4 list-disc list-inside text-gray-300">
+                                <li><b>With Accommodation & Food:</b> ₹1680 per person (Includes ₹1180 event fee + ₹500 for 2-day stay + applicable GST). Suitable for participants requiring lodging during the event.</li>
+                                <li><b>Without Accommodation:</b> ₹1180 per person (Includes ₹500 event fee + applicable GST+includes lunch). Recommended for local participants or those arranging their own stay.</li>
+                            </ul>
+                        </div>
+                         <div class="registration-card p-8 rounded-2xl">
+                            <h2 class="text-3xl font-bold text-white mb-6 font-brand">Additional Notes</h2>
+                            <ul class="space-y-4 list-disc list-inside text-gray-300">
+                                <li>The registration fee is non-refundable under any circumstances. Ensure accuracy before confirming your registration.</li>
+                                <li>Teams combining students from multiple disciplines are encouraged to participate.</li>
+                                <li>Only the team leader should complete the registration and make a single payment through the registration form on our website.</li>
+                                <li>Only fully registered teams with complete payment will be considered for shortlisting and participation.</li>
+                                <li>Certificates will be issued only to registered teams that fully participate in the event.</li>
+                                <li>On-spot registration is strictly not acceptable under any condition.</li>
+                                <li>Participants will receive only printed certificates; no digital copies will be provided after the event.</li>
+                                <li>All participants must report to the college between 8:00 AM and 8:45 AM. Late entry will not be permitted.</li>
+                                <li>Participants must maintain silence and avoid any form of celebration or noise while availing accommodation. Any disturbance will lead to disciplinary action.</li>
+                                <li>Formal attire is mandatory for all participants:
+                                    <ul class="list-disc list-inside ml-6 mt-2">
+                                        <li><b>Boys:</b> T-shirts are not allowed; wear formal shirts and trousers.</li>
+                                        <li><b>Girls:</b> Must wear kurtis, Western dresses are not allowed.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Event Details Modal Structure -->
-    <div id="event-Details-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none">
+    <div id="event-details-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none">
         <div id="modal-content" class="relative bg-[#0f172a] border border-teal-500/50 rounded-2xl p-8 max-w-lg w-full transform scale-95">
             <h3 id="modal-title" class="text-3xl font-bold text-teal-300 mb-4 font-sans"></h3>
             <p id="modal-description" class="text-gray-300 mb-6"></p>
-            <a id="modal-rulebook" href="#" target="_blank" class="text-sm text-teal-300 border border-teal-300/50 rounded-full py-2 px-4 hover:bg-teal-300/20 transition-colors">View Rule Book</a>
             <button id="modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
         </div>
     </div>
 
-    <script src="JAVA.JS"></script>
+    <script src="script.js"></script>
 </body>
 </html>
