@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 setTimeout(() => {
                     openOverlay(overlayId);
-                }, 500); 
+                }, 450); // Slightly less than the CSS transition to feel responsive
 
                 const onTransitionEnd = () => {
                    if(currentFlipContainer) {
@@ -209,9 +209,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.querySelectorAll('[id$="-close"]').forEach(closeBtn => {
-        closeBtn.addEventListener('click', closeOverlay);
-    });
+    // Specific listeners for the main overlay close buttons
+    document.getElementById('full-Details-close').addEventListener('click', closeOverlay);
+    document.getElementById('full-themes-close').addEventListener('click', closeOverlay);
+    document.getElementById('full-registration-close').addEventListener('click', closeOverlay);
 
 
     // --- Timeline Page Background Animation (Synapse Effect) ---
@@ -520,13 +521,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function openModal(title, description) {
         modalTitle.textContent = title;
         modalDescription.textContent = description;
-        body.classList.add('modal-open');
         modal.classList.add('is-visible');
     }
 
     function closeModal() {
         const modal = document.getElementById('event-details-modal');
-        body.classList.remove('modal-open');
         modal.classList.remove('is-visible');
     }
 
