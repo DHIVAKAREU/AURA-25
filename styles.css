@@ -859,6 +859,24 @@ body.modal-open {
         .Details-card {
             padding: 1rem;
             font-size: 1rem;
+            text-align: center;
+        }
+        .hackfest-card h3 {
+            font-size: 1.3rem !important;
+            margin-bottom: 0.5rem !important;
+            text-align: center !important;
+            display: block !important;
+        }
+        .hackfest-card {
+            padding-top: 1.5rem !important;
+        }
+        .faculty-association-mobile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            text-align: center;
+        }
         }
         #full-Details-overlay, #full-themes-overlay, #full-registration-overlay {
             padding: 0.5rem;
@@ -868,5 +886,5 @@ body.modal-open {
             font-size: 1rem;
             max-width: 95vw;
         }
-}
+
 
