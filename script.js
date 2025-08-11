@@ -1,4 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Home Page Countdown Timer ---
+    const homeCountdownDate = new Date("Sep 25, 2025 09:00:00").getTime();
+    function updateHomeCountdown() {
+        const now = new Date().getTime();
+        const distance = homeCountdownDate - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const daysEl = document.getElementById("home-days");
+        const hoursEl = document.getElementById("home-hours");
+        const minutesEl = document.getElementById("home-minutes");
+        const secondsEl = document.getElementById("home-seconds");
+
+        if(daysEl) daysEl.innerText = days < 10 ? "0" + days : days;
+        if(hoursEl) hoursEl.innerText = hours < 10 ? "0" + hours : hours;
+        if(minutesEl) minutesEl.innerText = minutes < 10 ? "0" + minutes : minutes;
+        if(secondsEl) secondsEl.innerText = seconds < 10 ? "0" + seconds : seconds;
+
+        if (distance < 0) {
+            if(daysEl) daysEl.innerText = "00";
+            if(hoursEl) hoursEl.innerText = "00";
+            if(minutesEl) minutesEl.innerText = "00";
+            if(secondsEl) secondsEl.innerText = "00";
+        }
+    }
+    updateHomeCountdown();
+    setInterval(updateHomeCountdown, 1000);
 
     // --- 3D Background Animation ---
     let scene, camera, renderer, particles;
@@ -110,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- Card Countdown Timer ---
-    const countdownDate = new Date("Sep 25, 2025 09:00:00").getTime();
+    const countdownDate = new Date("Sep 20, 2025 00:00:00").getTime();
     const countdownFunction = setInterval(() => {
         const now = new Date().getTime();
         const distance = countdownDate - now;
