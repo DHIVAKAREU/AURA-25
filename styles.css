@@ -721,4 +721,16 @@ body.modal-open {
     }
     .arrow-left { left: -0.5rem; }
     .arrow-right { right: -0.5rem; }
+    #contact .flex-col.md\:flex-row {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 1.5rem !important;
+    }
+    #contact .text-center,
+    #contact .md\:text-left {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
 }
